@@ -1,0 +1,213 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.boco.security.sam</groupId>
+  <artifactId>samconfigjsonview</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+
+  <name>samconfigjsonview</name>
+  <url>http://maven.apache.org</url>
+  
+    <!-- 安全公司分布在各地的私服，详细地址咨询当地管理员 -->
+  <!--  <repositories>  
+    <repository>  
+        <id>releases</id>  
+        <name>Nexus Release Repository</name>  
+        <url>http://localhost:8081/nexus/content/groups/public/</url>  
+    </repository>  
+    <snapshotRepository>  
+        <id>nexus-snapshots</id>  
+        <name>Nexus Snapshot Repository</name>  
+        <url>http://localhost:8081/nexus/content/groups/public/</url>  
+    </snapshotRepository>  
+  </repositories> -->
+
+ <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <springframework.version>3.2.8.RELEASE</springframework.version>
+    <curator.version>2.7.0</curator.version>
+  </properties>
+  
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<!-- The configuration of maven-jar-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<finalName>samconfigjsonview</finalName><!-- 打成的JAR包名，每个工程需要修改为artifactId名 -->
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix></classpathPrefix>
+							<mainClass>com.boco.security.sam.config.jsonview.SamConfigJsonViewMain</mainClass><!-- 应用的main class，每个工程需要修改 -->
+						</manifest>
+						<manifestEntries>
+							<JVM>-Xms128m -Xmx128m -XX:PermSize=64M -XX:MaxPermSize=128m</JVM><!-- 启动时的JVM参数 -->
+						</manifestEntries>
+					</archive>
+					<!-- 过滤掉不希望包含在jar中的文件
+					<excludes>
+						<exclude>**/zkConfig.properties</exclude>
+					</excludes>
+					 -->
+				</configuration>
+			</plugin>
+			<!-- The configuration of maven-assembly-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/package.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>16.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>dubbo</artifactId>
+      <version>2.5.3</version>
+      <exclusions>
+      	<exclusion>
+      		<artifactId>spring</artifactId>
+      		<groupId>org.springframework</groupId>
+      	</exclusion>
+      	<exclusion>
+      		<artifactId>netty</artifactId>
+      		<groupId>org.jboss.netty</groupId>
+      	</exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-context</artifactId>
+    	<version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-aop</artifactId>
+    	<version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-expression</artifactId>
+    	<version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.curator</groupId>
+    	<artifactId>curator-framework</artifactId>
+    	<version>${curator.version}</version>
+    	<exclusions>
+    		<exclusion>
+    			<artifactId>slf4j-api</artifactId>
+    			<groupId>org.slf4j</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>zookeeper</artifactId>
+    			<groupId>org.apache.zookeeper</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>log4j</artifactId>
+    			<groupId>log4j</groupId>
+    		</exclusion>
+    	</exclusions>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.curator</groupId>
+    	<artifactId>curator-client</artifactId>
+    	<version>${curator.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>com.101tec</groupId>
+    	<artifactId>zkclient</artifactId>
+    	<version>0.4</version>
+    	<exclusions>
+    		<exclusion>
+    			<artifactId>zookeeper</artifactId>
+    			<groupId>org.apache.zookeeper</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>log4j</artifactId>
+    			<groupId>log4j</groupId>
+    		</exclusion>
+    	</exclusions>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.zookeeper</groupId>
+    	<artifactId>zookeeper</artifactId>
+    	<version>3.4.6</version>
+    </dependency>
+    <dependency>
+  		<groupId>org.slf4j</groupId>
+  		<artifactId>slf4j-api</artifactId>
+  		<version>1.7.6</version>
+  	</dependency>
+  	<dependency>
+    	<groupId>com.boco.security</groupId>
+		<artifactId>core</artifactId>
+		<version>0.0.1</version>
+    </dependency>
+    <dependency> 
+    	<groupId>com.boco.security.sam</groupId>
+		<artifactId>samconfigservice</artifactId>
+		<version>0.0.5</version>
+    </dependency>
+    <dependency>
+	  <groupId>com.boco.security.resoperation</groupId>
+	  <artifactId>resoperation</artifactId>
+	  <version>1.0.0</version>
+	</dependency>
+	<dependency>
+	  <groupId>com.boco.security.resoperation</groupId>
+	  <artifactId>ganymed-ssh2-build209</artifactId>
+	  <version>1.0.0</version>
+	</dependency>
+  </dependencies>
+</project>

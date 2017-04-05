@@ -1,0 +1,58 @@
+!SESSION 2017-03-30 16:42:53.395 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:08.976
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\html\css_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.292
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\html\forms_lists_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.312
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\html\htmlform_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.368
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\html\html_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.400
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\html\javascript_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.447
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\jsp\jsf_f_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.507
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\jsp\jsf_h_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.566
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\jsp\struts_bean_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.629
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\jsp\struts_html_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.696
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\jsp\struts_logic_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2017-03-30 16:43:09.749
+!MESSAGE Installed snippet library: D:\MyEclipse\MyEclipse 10\configuration\org.eclipse.osgi\bundles\134\1\.cp\snippets\jsp\struts_tiles_snippets.xml
+!SESSION 2017-03-30 16:50:03.312 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.core.jobs 4 2 2017-03-30 16:50:37.752
+!MESSAGE An internal error occurred during: "CheckLicensesAndNotify".
+!STACK 0
+java.lang.NullPointerException
+	at com.genuitec.pulse.client.targetcfg.collab.ui.jobs.CheckLicensesAndNotifyJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.core.jobs 2 2 2017-03-30 16:50:39.040
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: com.genuitec.pulse2.client.services.internal.PulseClient$1
+
+!ENTRY org.eclipse.core.jobs 2 2 2017-03-30 16:50:39.041
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: com.genuitec.pulse.client.targetcfg.collab.ui.internal.InformAboutDashboardStartup$CheckDashboardPreferencesAndNotifyJob

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+    
+    <bean class="com.boco.security.sam.config.jsonview.init.ConfigJsonViewBeanPostProcessor" />
+    
+    <!-- 读取properties配置文件 -->	
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	    <property name="locations">
+	        <list>
+	            <value>classpath:/zkConfig.properties</value>
+	        </list>
+	    </property>
+    </bean>
+    
+	<!-- zookeeper连接工厂类 -->
+	<bean id="zookeeperTools" class="com.boco.security.core.init.zk.ZookeeperTools">
+	    <property name="zkConnectionString" value="${dubbo_registry_adrress}"/>
+	    <property name="listeners">
+	        <list>
+	            <bean class="com.boco.security.sam.config.jsonview.JsonViewConfigListener">
+	            	<property name="watcher" ref="dbWatcher"/>
+	            </bean>
+	        </list>
+	    </property>
+	</bean>
+	
+	<!-- 远程调用的接口 -->
+    <dubbo:reference id="configService" interface="com.boco.security.sam.config.interfaces.IConfigManage" check="false"/>
+    
+    <bean id="dbWatcher" class="com.boco.security.sam.config.jsonview.DBConfigVoWatcher">
+	    <property name="configService" ref="configService"/>
+	</bean>
+	
+	<bean id="configJsonView" class="com.boco.security.sam.config.jsonview.service.ConfigJsonView">
+		<property name="configService" ref="configService"/>
+	</bean>
+	
+	<bean id="managementCenterJsonView" class="com.boco.security.sam.config.jsonview.service.ManagementCenterJsonView">
+	</bean>
+	
+</beans>
